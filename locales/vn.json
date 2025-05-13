@@ -1,0 +1,15 @@
+{
+  "nav.accueil": "Trang chủ",
+  "nav.menu": "Thực đơn",
+  "nav.contact": "Liên hệ",
+  "btn.toVI": "🇻🇳 Chuyển sang Tiếng Việt",
+  "btn.toFR": "🇫🇷 Quay về tiếng Pháp",
+  "langInfo.fr": "Le site est en Français",
+  "langInfo.vn": "Trang web đang ở Tiếng Việt",
+  "footer.about": "Về chúng tôi / À propos",
+  "footer.contact": "Liên hệ / Contact",
+  "footer.follow": "Theo dõi / Suivez-nous",
+  "footer.copy": "© 2025 Memo Coffee. Bản quyền.",
+  "reviews.titleHome": "Đánh giá của khách hàng",
+  "reviews.titleForm": "Để lại đánh giá của bạn"
+}

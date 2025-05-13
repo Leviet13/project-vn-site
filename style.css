@@ -1,0 +1,585 @@
+/* ==== SPLASH ANIMÉ ==== */
+#splash {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+.splash-inner {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20%);
+  animation:
+    fadeInMove 1s ease-out forwards 0.3s,
+    stay      1.5s linear    forwards 1.3s,
+    fadeOut   0.8s ease-in   forwards 2.8s;
+}
+.splash-logo {
+  width: 300px;
+  animation: zoomIn 1s ease-out forwards 0.3s;
+}
+.splash-welcome {
+  font-family: var(--font-heading);
+  font-size: 2.4rem;
+  margin-top: 1rem;
+  color: var(--color-accent);
+  opacity: 0;
+  animation: textFadeIn 1s ease-out forwards 0.8s;
+}
+
+@keyframes fadeInMove {
+  from { opacity: 0; transform: translateY(30%) scale(0.8); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);   }
+}
+@keyframes zoomIn      { from { transform: scale(0.5); } to { transform: scale(1); } }
+@keyframes textFadeIn  { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes stay        { from { opacity: 1; } to { opacity: 1; } }
+@keyframes fadeOut     { from { opacity: 1; } to { opacity: 0; } }
+
+body.loaded #splash {
+  display: none !important;
+}
+
+/*================================
+ Variables & typographie
+================================*/
+:root {
+  --max-width:    1200px;
+  --spacing:      20px;
+  --font-heading: 'Alegreya', serif;
+  --font-body:    'Lato', sans-serif;
+  --color-dark:   #222;
+  --color-primary:#fff;
+  --color-accent: #FFD600;
+  --color-bg:     #fff;
+}
+
+/*================================
+ Reset & global
+================================*/
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+body {
+  font-family: var(--font-body);
+  color: #333;
+  background-color: var(--color-bg);
+  overflow-x: hidden;
+}
+
+/*================================
+ Header / nav sombre
+================================*/
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0;
+  background-color: var(--color-dark);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing);
+  z-index: 10;
+}
+.branding .logo { height: 40px; }
+.site-nav ul {
+  display: flex; gap: 1.5rem;
+  list-style: none;
+}
+.site-nav a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-family: var(--font-heading);
+  padding-bottom: 4px;
+}
+.site-nav a.active {
+  border-bottom: 2px solid var(--color-accent);
+}
+
+/*================================
+ Boutons langue
+================================*/
+.language-switch {
+  display: flex; gap: 0.5rem;
+}
+.language-switch button {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.language-switch button.hidden {
+  display: none;
+}
+
+/*================================
+ Container (sous le header)
+================================*/
+.container {
+  max-width: var(--max-width);
+  margin: 100px auto 0;
+  padding: 0 var(--spacing);
+  position: relative;
+  z-index: 3;
+}
+#content {
+  margin-top: 100px;
+  position: relative;
+  z-index: 3;
+}
+
+/*================================
+ Accueil – background flouté
+================================*/
+.background-layer {
+  position: fixed; inset: 0;
+  background: url('images/background.jpg') center/cover no-repeat;
+  filter: blur(8px);
+  z-index: 1;
+  pointer-events: none;
+}
+.background-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 2;
+  pointer-events: none;
+}
+.hero-intro {
+  text-align: center;
+  padding: 60px 20px 20px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+.hero-intro h1 {
+  font-size: 3.8rem;
+  margin-bottom: .5rem;
+  color: #222;
+}
+.hero-intro .subtitle {
+  font-size: 1.8rem;
+  color: #444;
+}
+
+/*================================
+ Apparition au scroll
+================================*/
+.hidden-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.hidden-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*================================
+ Liste des avis (Accueil)
+================================*/
+.reviews-list-section {
+  margin: 40px auto;
+  position: relative;
+  z-index: 4;
+}
+#reviews-list {
+  list-style: none;
+  padding: 0;
+}
+#reviews-list li {
+  background: rgba(255,255,255,0.9);
+  border-radius: 6px;
+  margin-bottom: 15px;
+  padding: 15px;
+}
+
+/*================================
+ Contact – deux boxes + paragraphe
+================================*/
+.contact-section {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 60px;
+  margin: 40px auto;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 3;
+}
+.contact-section > form,
+.contact-section .reviews-form-section {
+  flex: 1 1 400px;
+  max-width: 500px;
+  background: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.contact-section h1,
+.contact-section h2 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-heading);
+}
+.contact-section p.intro {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #666;
+}
+form .form-group {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+form label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+form input,
+form textarea,
+form select {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+form button {
+  background: var(--color-accent);
+  color: #000;
+  font-weight: 700;
+  border: none;
+  padding: 0.75rem;
+  width: 100%;
+  border-radius: 4px;
+}
+
+/*================================
+ Footer
+================================*/
+.site-footer {
+  background: #222;
+  color: #fff;
+  padding: var(--spacing) 0;
+  margin-top: 60px;
+  position: relative;
+  z-index: 3;
+}
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing);
+}
+.footer-section {
+  flex: 1 1 200px;
+}
+.footer-bottom {
+  text-align: center;
+  margin-top: var(--spacing);
+}
+
+/*================================
+ Responsivité
+================================*/
+@media (max-width: 800px) {
+  .contact-section { flex-direction: column; align-items: center; }
+  .hero {
+    flex-direction: column;
+    padding: 60px 20px;
+  }
+  .hero-image img { max-width: 80%; margin-top: 1rem; }
+  .container { margin-top: calc(2*var(--spacing) + 80px); }
+}
+/* == HERO : deux colonnes texte / image == */
+.hero-content {
+  position: relative;
+  z-index: 4;    /* doit être supérieur à overlay (qui est à 2) */
+}
+.hero-image img {
+  position: relative;
+  z-index: 4;    /* idem, pour passer devant le flou */
+  opacity: 1 !important;  /* s’il y a un fade-in résiduel */
+}
+
+.hero-content {
+  display: flex;
+  flex-wrap: wrap;             /* pour mobile */
+  align-items: flex-start;
+  gap: var(--spacing);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 100px 20px;
+  position: relative;
+  z-index: 4;                  /* au-dessus du flou */
+}
+
+.hero-text {
+  flex: 1 1 300px;
+}
+.hero-text h1 {
+  font-size: 3.8rem;
+  color: #222;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+.hero-text .subtitle {
+  font-size: 2rem;
+  color: #444;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.hero-text h2 {
+  font-size: 1.6rem;
+  margin-top: 1.5rem;
+  color: #222;
+}
+.hero-text p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #333;
+  /* — Texte du Hero en blanc — */
+.hero-text h1,
+.hero-text .subtitle,
+.hero-text h2,
+.hero-text p {
+  color: #fff !important;
+}
+
+}
+
+.hero-image {
+  flex: 0 0 auto;
+}
+.hero-image img {
+  max-width: 300px;            /* ajuste ici la taille */
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+/* — Titre & sous-titre du Hero en blanc — */
+.hero-intro h1,
+.hero-intro p {
+  color: #fff !important;
+}
+/* — Positionnement absolu du titre — */
+.hero {
+  position: relative; /* pour que .hero-intro se positionne par rapport à .hero */
+}
+
+.hero-intro {
+  position: absolute;
+  top: 60px;            /* à ajuster : plus petit pour remonter, plus grand pour descendre */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;           /* devant tout le reste */
+  text-align: center;   /* centre le texte */
+  width: 100%;          /* pour bien centrer */
+}
+/* — TITRE & SOUS-TITRE au-dessus de l'image, centré, en blanc — */
+.hero > h1,
+.hero > p {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff !important;
+  text-align: center;
+  z-index: 5;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ajuste ces deux valeurs “top” pour caler exactement sous la nav */
+.hero > h1 {
+  top: 60px;       /* essaie 40px, 50px, 60px… jusqu’à ce que ça colle */
+  font-size: 3rem; /* si tu veux agrandir encore */
+}
+.hero > p {
+  top: 110px;      /* à régler en fonction de ton h1 */
+  font-size: 1.4rem;
+}
+.hero .hero-desc p,
+.hero .hero-desc h3 {
+  color: #fff !important;
+}
+/* 1) On positionne la section .hero en relative */
+.hero {
+  position: relative;
+  padding-top: 180px; /* décale un peu le reste du contenu sous le titre */
+}
+
+/* 2) TITRE + SOUS-TITRE : centrés, en blanc, placés ABSOLUMENT */
+.hero > h1,
+.hero > p {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff !important;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  z-index: 5;
+}
+
+/* Ajuste ces valeurs “top” pour caler exactement sous ta nav fixe */
+.hero > h1 {
+  top: 60px;        /* essaie 50px, 60px, 70px… */
+  font-size: 3rem;  /* augmente/diminue si besoin */
+}
+.hero > p {
+  top: 110px;       /* règle le positionnement du sous-titre */
+  font-size: 1.6rem;
+}
+
+/* 3) IMAGE : plus petite, alignée à droite, animée au scroll */
+.hero img {
+  position: relative;
+  float: right;
+  width: 30%;          /* adapte ici la taille */
+  max-width: 300px;    /* ne dépassera pas 300px */
+  margin: 150px 5% 0 0;/* 150px sous le top, 5% à droite */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  z-index: 4;
+}
+
+/* Au scroll, on fait apparaître l’image */
+.hero img.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* ===== OVERRIDE HERO ===== */
+section.hero {
+  position: relative;
+  padding-top: 220px;  /* espace sous la nav + splash */
+  overflow: hidden;
+}
+
+/* Titre centré, blanc, absolument positionné */
+section.hero > h1 {
+  position: absolute !important;
+  top: 60px !important;          /* règle ici la hauteur exacte */
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  color: #fff !important;
+  font-size: 3rem !important;    /* augmente/diminue à ta guise */
+  margin: 0 !important;
+  z-index: 5 !important;
+}
+
+/* Sous-titre centré, blanc, juste en dessous du titre */
+section.hero > p {
+  position: absolute !important;
+  top: 110px !important;         /* règle ici le décalage sous le titre */
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  color: #fff !important;
+  font-size: 1.6rem !important;
+  margin: 0 !important;
+  z-index: 5 !important;
+}
+
+/* Image réduite, à droite, animée au scroll */
+section.hero > img {
+  position: relative !important;
+  display: block !important;
+  float: right !important;
+  width: 25% !important;         /* ajuste la taille ici */
+  max-width: 280px !important;   /* ne dépassera jamais 280px */
+  margin: 180px 5% 0 0 !important;/* espace au-dessus + à droite */
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important;
+  opacity: 0 !important;
+  transform: translateY(20px) !important;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out !important;
+  z-index: 4 !important;
+}
+
+/* Au scroll, on fait apparaître l’image */
+section.hero > img.visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+/* ===== HERO – override minimal ===== */
+section.hero {
+  position: relative;
+  padding-top: 180px;            /* décale le contenu sous la nav */
+  overflow: hidden;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* TITRE centré, blanc */
+section.hero > h1 {
+  position: absolute !important;
+  top: 60px !important;          /* règle cette valeur si besoin */
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  color: #fff !important;
+  font-size: 3rem !important;
+  margin: 0 !important;
+  z-index: 5 !important;
+}
+
+/* SOUS-TITRE centré, blanc, juste sous le titre */
+section.hero > p {
+  position: absolute !important;
+  top: 110px !important;         /* décale sous le h1 */
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  color: #fff !important;
+  font-size: 1.6rem !important;
+  margin: 0 !important;
+  z-index: 5 !important;
+}
+
+/* IMAGE à droite, taille ajustable */
+section.hero > img {
+  position: relative !important;
+  float: right !important;
+  width: 40% !important;         /* passe à 50% ou 30% si tu veux */
+  max-width: 400px !important;   /* ne dépassera jamais 400px */
+  margin: 160px 5% 0 0 !important;/* espace au-dessus (160px) + à droite */
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important;
+  opacity: 0 !important;
+  transform: translateY(20px) !important;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out !important;
+  z-index: 4 !important;
+}
+
+/* AU SCROLL, on le fait apparaître */
+section.hero > img.visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* === TRANSITIONS SMOOTH === */
+* {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Bouton de traduction jaune */
+.translate-btn {
+  background-color: #f9dc5c;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Onglets plus gros */
+.nav-link {
+  font-size: 1.2em;
+}

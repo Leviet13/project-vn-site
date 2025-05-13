@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Splash</title>
+  <style>
+    /* style ultra-simple pour le splash */
+    #splash {
+      position: fixed; inset: 0;
+      background: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-family: sans-serif;
+      font-size: 1.5rem;
+      z-index: 9999;
+    }
+    body.loaded #splash {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="splash">🚀 Splash OK! 🚀</div>
+  <div id="content">CONTENU DERRIÈRE</div>
+
+  <script>
+    // on attend 2 secondes, puis on ajoute .loaded
+    setTimeout(() => document.body.classList.add('loaded'), 2000);
+  </script>
+</body>
+</html>

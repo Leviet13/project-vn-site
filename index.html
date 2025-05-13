@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Memo Coffee</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Memo Coffee – fusion franco-vietnamienne autour d'une tasse de café à Hội An.">
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="home">
+
+  <!-- Inline script pour déclencher la classe .loaded après 3 s -->
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => document.body.classList.add('loaded'), 3000);
+    });
+  </script>
+
+  <!-- SPLASH ANIMÉ -->
+  <div id="splash">
+    <div class="splash-inner">
+      <img src="images/Logo MemoCoffee.png" alt="Logo Memo Coffee" class="splash-logo">
+      <h1 class="splash-welcome">Welcome to Memo Coffee</h1>
+    </div>
+  </div>
+
+  <!-- HEADER (barre sombre) -->
+  <header class="site-header">
+    <div class="branding">
+      <img src="images/Logo MemoCoffee.png" alt="Logo Memo Coffee" class="logo">
+    </div>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="#" data-page="home" data-i18n="nav.accueil" class="active">Accueil</a></li>
+        <li><a href="#" data-page="menu" data-i18n="nav.menu">Menu</a></li>
+        <li><a href="#" data-page="contact" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="language-switch">
+      <button id="lang-vn" data-i18n="btn.toVI">🇻🇳</button>
+      <button id="lang-fr" data-i18n="btn.toFR">🇫🇷</button>
+    </div>
+  </header>
+
+ <!-- CONTENU DYNAMIQUE -->
+<div id="content"></div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-section about">
+        <h4 data-i18n="footer.about">À propos</h4>
+        <p>Memo Coffee, fusion franco-vietnamienne autour d'une tasse de café à Hội An.</p>
+      </div>
+      <div class="footer-section contact-info">
+        <h4 data-i18n="footer.contact">Contact</h4>
+        <p>123 Rue de la Soie<br>Hội An, Vietnam</p>
+        <p>Tél. : +84 123 456 789<br>Email : contact@memo-coffee.com</p>
+      </div>
+      <div class="footer-section social">
+        <h4 data-i18n="footer.follow">Suivez-nous</h4>
+        <a href="#" aria-label="Facebook">Facebook</a><br>
+        <a href="#" aria-label="Instagram">Instagram</a><br>
+        <a href="#" aria-label="TripAdvisor">TripAdvisor</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-i18n="footer.copy">© 2025 Memo Coffee. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
